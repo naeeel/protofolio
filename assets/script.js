@@ -215,3 +215,59 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    // Tilt effect
+    projectCards.forEach(card => {
+        card.addEventListener('mousemove', handleTilt);
+        card.addEventListener('mouseleave', resetTilt);
+    });
+
+    function handleTilt(e) {
+        const card = this;
+        const cardRect = card.getBoundingClientRect();
+        const centerX = cardRect.left + cardRect.width / 2;
+        const centerY = cardRect.top + cardRect.height / 2;
+        const mouseX = e.clientX - centerX;
+        const mouseY = e.clientY - centerY;
+        
+        const rotateX = (mouseY / cardRect.height * 20).toFixed(2);
+        const rotateY = (mouseX / cardRect.width * -20).toFixed(2);
+        
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+    }
+
+    function resetTilt() {
+        this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+    }
+
+    // Parallax effect for project images
+    const projectImages = document.querySelectorAll('.project-image');
+    
+    window.addEventListener('scroll', () => {
+        projectImages.forEach(image => {
+            const speed = 0.2;
+            const rect = image.getBoundingClientRect();
+            const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+            
+            if (isInView) {
+                const yPos = (window.pageYOffset - rect.top) * speed;
+                image.style.backgroundPosition = `center ${yPos}px`;
+            }
+        });
+    });
+
+    // Tag animation
+    const projectTags = document.querySelectorAll('.project-tags span');
+    
+    projectTags.forEach(tag => {
+        tag.addEventListener('mouseenter', () => {
+            tag.style.transform = 'scale(1.1) rotate(2deg)';
+        });
+        
+        tag.addEventListener('mouseleave', () => {
+            tag.style.transform = 'scale(1) rotate(0deg)';
+        });
+    });
+});

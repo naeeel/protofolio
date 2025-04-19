@@ -361,7 +361,7 @@ nav .list-name-android li a:hover {
     background-position: center;
     background-repeat: no-repeat;
     width: 100%;
-    height: 1220vh;
+    height: 120vh;
     transition: transform 7s ease-out;
 }
 
@@ -506,6 +506,7 @@ nav .list-name-android li a:hover {
     border-radius: 3px;
     background: linear-gradient(90deg, var(--color-secondary), var(--color-accent));
     transition: width 1.5s ease-in-out;
+    
 }
 
 .bar__front .percentage {
@@ -579,7 +580,9 @@ nav .list-name-android li a:hover {
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
+    transform-style: preserve-3d;
+    perspective: 1000px;
 }
 
 .project-card:hover {
@@ -593,6 +596,8 @@ nav .list-name-android li a:hover {
     background-position: center;
     position: relative;
     overflow: hidden;
+    transform: translateZ(20px);
+    transition: transform 0.3s ease-out;
 }
 
 .project-info {
@@ -624,6 +629,9 @@ nav .list-name-android li a:hover {
     padding: 5px 12px;
     border-radius: 20px;
     font-weight: 500;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+    display: inline-block;
 }
 
 @media only screen and (min-width: 768px) {
